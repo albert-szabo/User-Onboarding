@@ -2,7 +2,7 @@ import React from 'react';
 
 const Form = (props) => {
     const { change, submit } = props;
-    const { name, email, password, checked } = props.values;
+    const { name, email, password, tos } = props.values;
 
     const onChange = (event) => {
         const { name, value, checked, type } = event.target;
@@ -18,40 +18,40 @@ const Form = (props) => {
     return (
         <div>
             <h1>User Addition Form</h1>
-            <form onSubmit={submit}>
+            <form onSubmit={onSubmit}>
                 <label>Name:
                     <input
                         type='text'
                         name='name'
-                        placeholder='Enter your name here'
+                        placeholder='Enter your name'
                         value={name}
-                        onChange={change}
+                        onChange={onChange}
                     />
                 </label>
                 <label>Email:
                     <input
                         type='email'
                         name='email'
-                        placeholder='Enter your email address here'
+                        placeholder='Enter your email address'
                         value={email}
-                        onChange={change}
+                        onChange={onChange}
                     />
                 </label>
                 <label>Password:
                     <input
                         type='password'
                         name='password'
-                        placeholder='Enter your chosen password here'
+                        placeholder='Enter your chosen password'
                         value={password}
-                        onChange={change}
+                        onChange={onChange}
                     />
                 </label>
                 <label>Terms of Service:
                     <input
                         type='checkbox'
                         name='tos'
-                        checked={checked}
-                        onChange={change}
+                        checked={tos}
+                        onChange={onChange}
                     />
                 </label>
                 <input type='submit' value='Add user' />
