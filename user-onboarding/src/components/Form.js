@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Form = (props) => {
-    const { change, submit } = props;
+    const { change, submit, errors } = props;
     const { name, email, password, tos } = props.values;
 
     const onChange = (event) => {
@@ -18,6 +18,10 @@ const Form = (props) => {
     return (
         <div>
             <h1>User Addition Form</h1>
+            <h4>{errors.name}</h4>
+            <h4>{errors.email}</h4>
+            <h4>{errors.password}</h4>
+            <h4>{errors.tos}</h4>
             <form onSubmit={onSubmit}>
                 <label>Name:
                     <input
