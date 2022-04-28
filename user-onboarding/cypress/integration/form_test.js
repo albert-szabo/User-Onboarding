@@ -45,6 +45,22 @@ describe('User Addition Form', () => {
         })
     })
 
+    describe('Checking for form validation if an input is left empty', () => {
+        it('Corresponding error appears', () => {
+            passwordInput()
+                .type('{selectAll}a{backspace}')
+                .should('have.value', '');
+
+            cy.contains('Please enter a password.').should('exist');
+
+            passwordInput()
+                .type('+p@sSwOrd1!')
+                .should('have.value', '+p@sSwOrd1!');
+            
+            cy.contains('Please enter a password.').should('not.exist');
+        })
+    })
+
     describe('Checking the terms of service checkbox', () => {
         it('Can check the terms of service checkbox', () => {
             tosCheckbox().click();
@@ -60,5 +76,4 @@ describe('User Addition Form', () => {
             cy.contains('sample@email.com').should('exist');
         })
     })
-
 })
