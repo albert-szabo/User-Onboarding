@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import './App.css';
 
@@ -24,6 +25,7 @@ const initialFormErrors = {
 function App() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [users, setUsers] = useState([]);
 
   const validate = (name, value) => {
     yup.reach(schema, name)
@@ -38,12 +40,24 @@ function App() {
   }
 
   const handleSubmit = () => {
-
+    axios.post('https://reqres.in/api/users', formValues)
+      .then(response => {
+        setUsers([ response.data, ...users ])
+      })
+      .catch(error => console.error(error))
+      .finally(() => setFormValues(initialFormValues))
   }
 
   return (
     <div className="App">
-      <Form values={formValues} change={handleChange} submit={handleSubmit} errors={formErrors} />
+      <Form values={formValues} errors={formErrors} change={handleChange} submit={handleSubmit} />
+      {users.map(user => {
+        return <div key={user.id}>
+            <h6>{user.createdAt}</h6>
+            <h6>{user.name}</h6>
+            <h6>{user.email}</h6>
+          </div>
+      })}
     </div>
   );
 }
