@@ -1,6 +1,6 @@
 describe('User Addition Form', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:3000')
+        cy.visit('http://localhost:3000');
     })
 
     const nameInput = () => cy.get('input[name=name]');
@@ -22,6 +22,28 @@ describe('User Addition Form', () => {
         addUserButton().should('exist');
 
         cy.contains('Add user').should('exist');
+    })
+
+    describe('Filling out the inputs', () => {
+        it('Can navigate to the site', () => {
+            cy.url().should('include', 'localhost');
+        })
+
+        it('Can type in inputs', () => {
+            nameInput()
+                .should('have.value', '')
+                .type('firstName lastName')
+                .should('have.value', 'firstName lastName');
+            emailInput()
+                .should('have.value', '')
+                .type('sample@email.com')
+                .should('have.value', 'sample@email.com');
+            passwordInput()
+                .should('have.value', '')
+                .type('p@sSwOrd1!')
+                .should('have.value', 'p@sSwOrd1!');
+        })
+
     })
 
 })
