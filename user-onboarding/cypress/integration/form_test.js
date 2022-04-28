@@ -40,10 +40,25 @@ describe('User Addition Form', () => {
                 .should('have.value', 'sample@email.com');
             passwordInput()
                 .should('have.value', '')
-                .type('p@sSwOrd1!')
-                .should('have.value', 'p@sSwOrd1!');
+                .type('+p@sSwOrd1!')
+                .should('have.value', '+p@sSwOrd1!');
         })
+    })
 
+    describe('Checking the terms of service checkbox', () => {
+        it('Can check the terms of service checkbox', () => {
+            tosCheckbox().click();
+            tosCheckbox().should('have.value', 'on');
+        })
+    })
+
+    describe('Adding a new user', () => {
+        it('Can submit a new user', () => {
+            addUserButton().click();
+
+            cy.contains('firstName lastName').should('exist');
+            cy.contains('sample@email.com').should('exist');
+        })
     })
 
 })
